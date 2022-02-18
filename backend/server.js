@@ -4,6 +4,8 @@ import session from 'express-session'
 import helmet from 'helmet'
 import logger from 'morgan'
 import { router } from './routes/router.js'
+import { fileURLToPath } from 'url'
+import { dirname, join } from 'path'
 
 try {
   await connectDB()
@@ -12,6 +14,8 @@ try {
 
   app.use(helmet())
   app.use(logger('dev'))
+
+  const directoryFullName = dirname(fileURLToPath(import.meta.url))
 
   app.use(express.urlencoded({ extended: false }))
 
@@ -36,16 +40,19 @@ try {
     if (err.status === 404) {
       return res
         .status(404)
+        .sendFile(join(directoryFullName, 'views', 'errors', '404.html'))
     } else if (err.status === 403) {
       // Sends a forbidden page.
       return res
         .status(403)
+        .sendFile(join(directoryFullName, 'views', 'errors', '403.html'))
     }
 
     // 500 Internal Server Error, all other send this response in production.
     if (req.app.get('env') !== 'development') {
       return res
         .status(500)
+        .sendFile(join(directoryFullName, 'views', 'errors', '500.html'))
     }
 
     // Development
