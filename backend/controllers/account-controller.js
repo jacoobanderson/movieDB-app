@@ -43,7 +43,7 @@ export class AccountController {
         }
       })
     } catch (error) {
-      req.status(500).json({ type: 'danger', text: error.message })
+      res.status(500).json({ type: 'danger', text: error.message })
     }
   }
 
