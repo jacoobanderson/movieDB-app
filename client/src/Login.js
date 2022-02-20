@@ -19,9 +19,6 @@ export const Login = () => {
             })
         })
         const res = await response.json()
-        console.log(event.target.username.value)
-        console.log(response.id)
-        console.log(response.body)
         navigate(`/${res.id}/overview`)
     } catch (error) {
         console.error(error)
