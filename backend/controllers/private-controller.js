@@ -43,4 +43,6 @@ export class PrivateController {
   async access (req, res, next) {
     res.status(200).json({success: true, text: "You got access to the private data in this route"})
   }
+
+  // req.params.id is in the url check if req.params.id === same id as findOne on user and that user has the same username as session username
 }

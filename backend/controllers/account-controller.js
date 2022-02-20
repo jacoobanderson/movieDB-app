@@ -39,7 +39,8 @@ export class AccountController {
           next(err)
         } else {
           req.session.username = user.username
-          res.status(200).json({ type: 'success', text: 'You are now logged in.' })
+          console.log(user.id)
+          res.status(200).json({ type: 'success', text: 'You are now logged in.', id: user.id })
         }
       })
     } catch (error) {
@@ -56,6 +57,7 @@ export class AccountController {
    */
   anonymousCheck (req, res, next) {
     console.log(req.session.username)
+    console.log(req.params.id)
     const error = new Error('Not Found')
     error.status = 404
     !req.session.username ? next() : next(error)

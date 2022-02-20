@@ -1,7 +1,8 @@
 import React from 'react'
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export const Login = () => {
+  const navigate = useNavigate()
   const submitHandler = async (event) => {
     event.preventDefault()
     try {
@@ -17,9 +18,11 @@ export const Login = () => {
                 'password': `${event.target.password.value}`
             })
         })
+        const res = await response.json()
         console.log(event.target.username.value)
-        console.log(response.json())
+        console.log(response.id)
         console.log(response.body)
+        navigate(`/${res.id}/overview`)
     } catch (error) {
         console.error(error)
     }
