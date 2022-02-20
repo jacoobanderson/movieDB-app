@@ -1,5 +1,6 @@
 import React from 'react'
 import { useNavigate } from "react-router-dom";
+import { Form, Button, Container } from 'react-bootstrap'
 
 export const Register = () => {
   const navigate = useNavigate()
@@ -25,27 +26,23 @@ export const Register = () => {
     }
   }
   return (
-    <form onSubmit={submitHandler}>
-        <div>
-          <label>
-            Username
-            <input name="username" type="username" placeholder="username" />
-          </label>
-        </div>
-        <div>
-          <label>
-            Email
-            <input name="email" type="email" placeholder="Email" />
-          </label>
-        </div>
-        <div>
-          <label>
-            Password
-            <input name="password" type="password" placeholder="Password" />
-          </label>
-        </div>
-        <button type="submit">Register</button>
-    </form>
+        <Container className="w-50 p-5">
+        <Form onSubmit={submitHandler}>
+            <Form.Group className="mb-3">
+                <Form.Label>Username</Form.Label>
+                <Form.Control name="username" type="username" placeholder="Username" />
+            </Form.Group>
+            <Form.Group className="mb-3">
+                <Form.Label>Email</Form.Label>
+                <Form.Control name="email" type="email" placeholder="Email" />
+            </Form.Group>
+            <Form.Group className="mb-3">
+                <Form.Label>Password</Form.Label>
+                <Form.Control name="password" type="password" placeholder="Password" />
+            </Form.Group>
+            <Button type="submit" variant="primary">Register</Button>
+        </Form>
+        </Container>
   )
 }
 

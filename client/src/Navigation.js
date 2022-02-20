@@ -4,7 +4,7 @@ import { Navbar, Nav } from 'react-bootstrap'
 
 export const Navigation = () => {
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar bg="light" expand="lg" className="p-3">
       <LinkContainer to="/">
         <Navbar.Brand>MovieDB</Navbar.Brand>
       </LinkContainer>
