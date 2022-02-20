@@ -17,23 +17,20 @@ export class PrivateController {
         const user = await User.findOne({ _id: req.params.id })
         console.log(req.session.username)
         if (!user) {
-
-        const error = new Error('Not found')
-        error.status = 404
-        return next(error)
+            const error = new Error('Not found')
+            error.status = 404
+            return next(error)
         }
         // If the user is anonymous, throw 404.
         if (!req.session.username) {
-
-        const error = new Error('Not found')
-        error.status = 404
-        return next(error)
+            const error = new Error('Not found')
+            error.status = 404
+            return next(error)
         // If another user tries to access someone elses page throw 403.
         } else if (req.params.id && (user.username !== req.session.username)) {
-
-        const error = new Error('Forbidden')
-        error.status = 403
-        return next(error)
+            const error = new Error('Forbidden')
+            error.status = 403
+            return next(error)
         }
         next()
     } else {

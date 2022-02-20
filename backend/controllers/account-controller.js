@@ -55,6 +55,7 @@ export class AccountController {
    * @param {Function} next - Express next middleware function.
    */
   anonymousCheck (req, res, next) {
+    console.log(req.session.username)
     const error = new Error('Not Found')
     error.status = 404
     !req.session.username ? next() : next(error)

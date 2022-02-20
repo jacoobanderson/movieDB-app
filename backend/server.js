@@ -3,6 +3,7 @@ import { connectDB } from './config/mongoose.js'
 import session from 'express-session'
 import helmet from 'helmet'
 import logger from 'morgan'
+import cors from 'cors'
 import { router } from './routes/router.js'
 import { fileURLToPath } from 'url'
 import { dirname, join } from 'path'
@@ -17,7 +18,15 @@ try {
 
   const directoryFullName = dirname(fileURLToPath(import.meta.url))
 
-  app.use(express.urlencoded({ extended: false }))
+  app.use(express.json())
+
+  app.use((req, res, next) => {
+    res.append('Access-Control-Allow-Origin', ['http://localhost:3000'])
+    res.append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE')
+    res.append('Access-Control-Allow-Headers', 'Content-Type')
+    res.append('Access-Control-Allow-Credentials', 'true')
+    next();
+});
 
   // Session set up.
   const sessionOptions = {
